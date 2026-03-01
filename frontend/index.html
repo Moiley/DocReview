@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企业文档智能审校系统 — 创建任务</title>
+  <meta name="description" content="基于大语言模型的企业文档智能审校系统，支持多策略文档解析与双Agent协同架构">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-logo">
+        <div class="app-logo-icon">📄</div>
+        <div>
+          <div class="app-logo-text">DocReview AI</div>
+          <div class="app-logo-sub">企业文档智能审校系统</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link active" href="index.html">新建任务</a>
+        <a class="nav-link" href="history.html">历史任务</a>
+      </nav>
+    </header>
+
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step active" id="step1">
+        <span class="step-number">1</span>上传文件
+      </div>
+      <div class="step" id="step2">
+        <span class="step-number">2</span>选择检查项
+      </div>
+      <div class="step" id="step3">
+        <span class="step-number">3</span>选择策略
+      </div>
+    </div>
+
+    <!-- Step 1: File Upload -->
+    <div id="panel-upload" class="card section-spacer">
+      <div class="card-title"><span class="icon">📁</span> 上传文档</div>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">⬆️</div>
+        <div class="upload-text">拖拽文件到此处，或 <strong>点击选择</strong></div>
+        <div class="upload-hint">支持 PDF、DOCX、XLSX、PPTX、CHM 格式，可多文件上传</div>
+        <input type="file" id="fileInput" multiple accept=".pdf,.docx,.xlsx,.pptx,.chm" style="display:none">
+      </div>
+      <div class="file-list" id="fileList"></div>
+      <div class="mt-24" style="text-align:right">
+        <button class="btn btn-primary" id="btnToStep2" disabled>下一步 →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Scan Items -->
+    <div id="panel-scan" class="card section-spacer" style="display:none">
+      <div class="card-title"><span class="icon">🔍</span> 选择检查项</div>
+      <div class="flex-between mb-16">
+        <span class="text-sm text-muted">选择需要检查的内容类型</span>
+        <div>
+          <button class="btn btn-sm btn-secondary" id="btnSelectAll">全选</button>
+          <button class="btn btn-sm btn-secondary" id="btnSelectDefault" style="margin-left:6px">推荐项</button>
+        </div>
+      </div>
+      <div class="scan-grid" id="scanGrid"></div>
+      <div class="mt-24 flex-between">
+        <button class="btn btn-secondary" id="btnBackToStep1">← 上一步</button>
+        <button class="btn btn-primary" id="btnToStep3">下一步 →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Strategy -->
+    <div id="panel-strategy" class="card section-spacer" style="display:none">
+      <div class="card-title"><span class="icon">⚙️</span> 选择审校方式</div>
+      <div class="strategy-group mb-16">
+        <div class="strategy-card" id="card-ssla" onclick="selectStrategy('ours-fixed')">
+          <input type="radio" name="strategy" value="ours-fixed">
+          <div class="strategy-name">快速审校 (SSLA + Dual-Agent)</div>
+          <div class="strategy-desc">
+            CPU处理，低延迟<br>
+            适合对日常文档进行快速检查
+          </div>
+        </div>
+        <div class="strategy-card selected" id="card-hdca" onclick="selectStrategy('ours-adaptive')">
+          <input type="radio" name="strategy" value="ours-adaptive" checked>
+          <div class="strategy-name">精细审校 (HDCA + Dual-Agent)</div>
+          <div class="strategy-desc">
+            MinerU 解析，最佳性能<br>
+            适合对复杂版面或拟对外发布文档进行精细审校
+          </div>
+          <span class="strategy-badge">推荐</span>
+        </div>
+      </div>
+      <div class="mt-24 flex-between">
+        <button class="btn btn-secondary" id="btnBackToStep2">← 上一步</button>
+        <button class="btn btn-primary btn-lg" id="btnSubmit">🚀 开始审校</button>
+      </div>
+    </div>
+
+    <!-- Submitting Overlay -->
+    <div id="submitting-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:100; display:none;">
+      <div class="flex-center" style="height:100%;">
+        <div class="card" style="text-align:center; padding:48px;">
+          <div class="spinner" style="width:40px; height:40px; margin:0 auto 16px;"></div>
+          <div style="color:var(--gray-200); font-size:1.1rem; font-weight:600;">正在创建任务...</div>
+          <div class="text-sm text-muted mt-12">请稍候，文件上传中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

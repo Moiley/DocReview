@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务结果 — 企业文档智能审校系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-logo">
+                <div class="app-logo-icon">📄</div>
+                <div>
+                    <div class="app-logo-text">DocReview AI</div>
+                    <div class="app-logo-sub">企业文档智能审校系统</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a class="nav-link" href="index.html">新建任务</a>
+                <a class="nav-link" href="history.html">历史任务</a>
+            </nav>
+        </header>
+
+        <!-- Task Status Banner -->
+        <div class="card section-spacer" id="statusCard">
+            <div class="flex-between mb-16">
+                <div>
+                    <h2 style="color:var(--gray-900); font-size:1.2rem; margin-bottom:4px;">
+                        审校任务
+                        <span class="tag tag-primary" id="taskIdTag"
+                            style="margin-left:8px; font-family:var(--font-mono); font-size:0.7rem;"></span>
+                    </h2>
+                    <div id="statusText" class="text-sm text-muted"></div>
+                </div>
+                <div id="statusBadge">
+                    <span class="tag tag-warning"><span class="status-dot processing"></span>处理中</span>
+                </div>
+            </div>
+            <div class="progress-bar" id="progressBarWrap">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="text-xs text-muted mt-12" id="progressLabel">进度: 0%</div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stat-grid" id="statsSection">
+            <div class="stat-card">
+                <div class="stat-value highlight" id="statProblems">-</div>
+                <div class="stat-label">发现问题</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statFiles">-</div>
+                <div class="stat-label">文件数</div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex-between section-spacer" id="actionsRow" style="display:none;">
+            <a class="btn btn-success" id="btnDownload">📥 下载审校报告</a>
+            <a class="btn btn-primary" id="btnViewIssues">查看问题详情 →</a>
+        </div>
+
+        <!-- Per-ScanItem Results -->
+        <div class="card section-spacer" id="resultSection" style="display:none;">
+            <div class="card-title"><span class="icon">📊</span> 按检查项汇总</div>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>检查项</th>
+                            <th>文件数</th>
+                            <th>问题数</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- File-level Results -->
+        <div class="card section-spacer" id="fileSection" style="display:none;">
+            <div class="card-title"><span class="icon">📂</span> 按文件汇总</div>
+            <div id="fileResults"></div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/task.js"></script>
+</body>
+
+</html>

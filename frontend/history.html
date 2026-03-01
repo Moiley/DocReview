@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史任务 — 企业文档智能审校系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-logo">
+                <div class="app-logo-icon">📄</div>
+                <div>
+                    <div class="app-logo-text">DocReview AI</div>
+                    <div class="app-logo-sub">企业文档智能审校系统</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a class="nav-link" href="index.html">新建任务</a>
+                <a class="nav-link active" href="history.html">历史任务</a>
+            </nav>
+        </header>
+
+        <div class="card section-spacer">
+            <div class="flex-between mb-16">
+                <div class="card-title" style="margin-bottom:0;"><span class="icon">📋</span> 历史任务列表</div>
+                <a href="index.html" class="btn btn-primary btn-sm">+ 新建任务</a>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table" id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>任务 ID</th>
+                            <th>状态</th>
+                            <th>问题数</th>
+                            <th>创建时间</th>
+                            <th>完成时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody"></tbody>
+                </table>
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <div class="empty-icon">📭</div>
+                <div class="empty-text">暂无历史任务</div>
+                <div class="empty-hint">创建您的第一个审校任务吧</div>
+                <a href="index.html" class="btn btn-primary mt-24">创建任务</a>
+            </div>
+
+            <div class="flex-center mt-24" id="loadingState">
+                <span class="spinner"></span>
+                <span class="text-sm text-muted" style="margin-left:12px;">加载中...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/history.js"></script>
+</body>
+
+</html>

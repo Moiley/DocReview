@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题详情 — 企业文档智能审校系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-logo">
+                <div class="app-logo-icon">📄</div>
+                <div>
+                    <div class="app-logo-text">DocReview AI</div>
+                    <div class="app-logo-sub">企业文档智能审校系统</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a class="nav-link" href="index.html">新建任务</a>
+                <a class="nav-link" href="history.html">历史任务</a>
+            </nav>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="mb-16">
+            <a href="#" id="backLink" class="text-sm" style="color:var(--primary-400);">← 返回任务概览</a>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card section-spacer">
+            <div class="card-title"><span class="icon">🔎</span> 审校问题列表</div>
+            <div class="filter-bar">
+                <select id="filterType">
+                    <option value="">全部检查项</option>
+                </select>
+                <select id="filterFile">
+                    <option value="">全部文件</option>
+                </select>
+                <span class="text-sm text-muted" id="totalCount"></span>
+            </div>
+        </div>
+
+        <!-- Issue List -->
+        <div id="issueList"></div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <div class="empty-icon">📭</div>
+            <div class="empty-text">暂无审校问题</div>
+            <div class="empty-hint">该任务未发现任何问题，或任务仍在处理中</div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/issues.js"></script>
+</body>
+
+</html>
